@@ -28,6 +28,11 @@ AliPay SDK for Golang
 
 	alipay.trade.fastpay.refund.query
 	
+	
+* **统一收单线下交易预创建**
+
+	alipay.trade.precreate
+	
 #### 通知
 	
 * **通知内容转换及签名验证**
