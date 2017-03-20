@@ -26,6 +26,8 @@ type AliPay struct {
 	client          *http.Client
 }
 
+
+
 func New(appId, partnerId string, publicKey, privateKey []byte, isProduction bool) (client *AliPay) {
 	client = &AliPay{}
 	client.appId = appId

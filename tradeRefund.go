@@ -1,6 +1,5 @@
 package alipay
 
-
 // https://doc.open.alipay.com/docs/api.htm?spm=a219a.7395905.0.0.5zkPUI&docType=4&apiId=759
 // alipay.trade.refund (统一收单交易退款接口)
 type AliPayTradeRefund struct {
