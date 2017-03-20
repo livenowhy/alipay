@@ -42,3 +42,9 @@ func (this *AliPay) TradePrecreate(param AliPayTradePrecreate) (results *AliPayT
 	err = this.doRequest("POST", param, &results)
 	return results, err
 }
+
+
+func (this *AliPay) TradeCanncel(param AliPayTradeCancel) (results *AliPayTradeCancelResponse, err error) {
+	err = this.doRequest("POST", param, &results)
+	return results, err
+}

@@ -33,6 +33,10 @@ AliPay SDK for Golang
 
 	alipay.trade.precreate
 	
+* **统一收单交易撤销接口**
+
+	alipay.trade.cancel
+	
 #### 通知
 	
 * **通知内容转换及签名验证**
