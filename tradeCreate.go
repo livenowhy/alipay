@@ -1,6 +1,7 @@
 package alipay
 
 
+
 // https://doc.open.alipay.com/docs/api.htm?spm=a219a.7395905.0.0.CkYNiG&docType=4&apiId=1046
 // alipay.trade.create (统一收单交易创建接口)
 // 商户通过该接口进行交易的创建下单
@@ -97,5 +98,3 @@ type GoodsDetailItem struct {
 	Body          string `json:"body"`
 	ShowUrl       string `json:"show_url"`
 }
-
-
