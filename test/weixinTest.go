@@ -1,34 +1,43 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/livenowhy/alipay/wxpay"
+	"fmt"
 )
 
-
-
-func TestPrecreate() {
-
-	//var client = wxpay.GoodsDetail{}.New(alipay.AppID, "2088102169227503", alipay.PublicKey, alipay.PrivateKey, false)
-	var p = wxpay.WeixinTradePrecreate{}
-	p.Appid = "1230000109"
-	p.MchId= "1230000109"
-	p.NonceStr = "1230000109"
-	p.Sign = "1230000109"
-	p.Body = "1230000109"
-	p.OutTradeNo = "1230000109"
-	p.TotalFee = 123
-	p.SpbillCreateIp = "123.12.12.123"
-	p.NotifyUrl = "123.12.12.123"
-	p.TradeType = "web"
-
-
-	//var r, err = client.TradePrecreate(p)
-	//fmt.Println(err, r)
-	//fmt.Println(r.IsSuccess(), err, r.AliPayTradePrecreate.QrCode)
-}
-
-
 func main() {
-	fmt.Printf("sss")
+	//初始化
+	cfg := &wxpay.WxConfig{
+		AppId:         "10000100",
+		AppKey:        "10000100",
+		MchId:         "10000100",
+		NotifyUrl:     "10000100",
+		PlaceOrderUrl: "https://api.mch.weixin.qq.com/pay/unifiedorder",
+		QueryOrderUrl: "https://api.mch.weixin.qq.com/pay/orderquery",
+		TradeType:     "WEB",
+	}
+	appTrans, err := wxpay.NewAppTrans(cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	//获取 prepay id, 手机端得到 prepay id 后加上验证就可以使用这个 id 发起支付调用
+	prepayId, err := appTrans.Submit("10000100", 1, "10000100", "114.25.139.11")
+	if err != nil {
+		fmt.Printf("appTrans.Submit is error: %s \n", err.Error())
+		//panic(err)
+	}
+	fmt.Println(prepayId)
+	//
+	////加上Sign，已方便手机直接调用
+	//payRequest := appTrans.NewPaymentRequest(prepayId)
+	//fmt.Println(payRequest)
+	//
+	////查询订单接口
+	//queryResult, err := appTrans.Query("1008450740201411110005820873")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//fmt.Println(queryResult)
 }

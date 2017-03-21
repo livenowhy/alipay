@@ -6,7 +6,6 @@ import (
 	"github.com/livenowhy/goTools/xmltools"
 	"github.com/livenowhy/goTools/tokentools"
 	"fmt"
-	"github.com/livenowhy/alipay/wxpay-old"
 )
 
 // AppTrans is abstact of Transaction handler.
@@ -150,8 +149,7 @@ func (this *AppTrans) newOrderRequest(orderId, amount, desc, clientIp string) ma
 	param["attach"] = "10000100" //optional
 	param["body"] = desc
 	param["mch_id"] = this.Config.MchId
-	//param["nonce_str"] = NewNonceString()
-	param["nonce_str"] = "10000100"
+	param["nonce_str"] = tokentools.NewNonceString()
 	param["notify_url"] = this.Config.NotifyUrl
 	param["out_trade_no"] = orderId
 	param["spbill_create_ip"] = clientIp
@@ -167,7 +165,6 @@ func (this *AppTrans) signedOrderRequestXmlString(orderId, amount, desc, clientI
 
 	fmt.Printf("order: %s \n", order)
 	fmt.Printf("sign: %s \n", sign)
-
 	order["sign"] = sign
 
 	return xmltools.ToXmlString(order)
