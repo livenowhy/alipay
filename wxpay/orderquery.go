@@ -87,6 +87,7 @@ func (this *AppTrans) newQueryXml(transId string) string {
 
 	sign := httptools.Sign(param, this.Config.AppKey)
 	param["sign"] = sign
+	fmt.Printf("sign : %s \n", sign)
 
 	return xmltools.ToXmlString(param)
 }
@@ -96,6 +97,7 @@ func (this *AppTrans) Query(transId string) (QueryOrderResult, error) {
 	queryOrderResult := QueryOrderResult{}
 
 	queryXml := this.newQueryXml(transId)
+	fmt.Printf("queryXml: %s \n", queryXml)
 	// fmt.Println(queryXml)
 	resp, err := httptools.DoHttpPost(this.Config.QueryOrderUrl, []byte(queryXml))
 	if err != nil {

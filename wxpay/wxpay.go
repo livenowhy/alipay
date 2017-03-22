@@ -84,7 +84,8 @@ func (this *AppTrans) newOrderRequest(orderId, amount, desc, clientIp string) ma
 	param["attach"] = "10000100" //optional
 	param["body"] = desc
 	param["mch_id"] = this.Config.MchId
-	param["nonce_str"] = tokentools.NewNonceString()
+	//param["nonce_str"] = tokentools.NewNonceString()
+	param["nonce_str"] = "10000100"
 	param["notify_url"] = this.Config.NotifyUrl
 	param["out_trade_no"] = orderId
 	param["spbill_create_ip"] = clientIp

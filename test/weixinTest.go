@@ -6,10 +6,10 @@ import (
 	"fmt"
 )
 
-func main() {
+func TestTrans()  {
 	//初始化
 	cfg := &wxpay.WxConfig{
-		AppId:         "10000100",
+		AppId:         "wxd678efh567hg6787",
 		AppKey:        "10000100",
 		MchId:         "10000100",
 		NotifyUrl:     "10000100",
@@ -29,15 +29,40 @@ func main() {
 		//panic(err)
 	}
 	fmt.Println(prepayId)
+}
+
+func TestQuery() {
+
+		//初始化
+	cfg := &wxpay.WxConfig{
+		AppId:         "wxd678efh567hg6787",
+		AppKey:        "10000100",
+		MchId:         "10000100",
+		NotifyUrl:     "10000100",
+		PlaceOrderUrl: "https://api.mch.weixin.qq.com/pay/unifiedorder",
+		QueryOrderUrl: "https://api.mch.weixin.qq.com/pay/orderquery",
+		TradeType:     "WEB",
+	}
+	appTrans, err := wxpay.NewAppTrans(cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	// 查询订单接口
+	queryResult, err := appTrans.Query("1008450740201411110005820873")
+	if err != nil {
+		fmt.Printf("appTrans.Submit is error: %s \n", err.Error())
+		//panic(err)
+	}
+	fmt.Println(queryResult)
+}
+
+func main() {
+	TestQuery()
+
 	//
 	////加上Sign，已方便手机直接调用
 	//payRequest := appTrans.NewPaymentRequest(prepayId)
 	//fmt.Println(payRequest)
 	//
-	////查询订单接口
-	//queryResult, err := appTrans.Query("1008450740201411110005820873")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//fmt.Println(queryResult)
 }

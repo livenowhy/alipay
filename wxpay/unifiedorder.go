@@ -98,6 +98,8 @@ func ParsePlaceOrderResult(resp []byte) (PlaceOrderResult, error) {
 // 提交
 func (this *AppTrans) Submit(orderId string, amount float64, desc string, clientIp string) (string, error) {
 
+
+	// 签名下单的xml报文,请求报文中添加 sign 内容
 	odrInXml := this.signedOrderRequestXmlString(orderId, fmt.Sprintf("%.0f", amount), desc, clientIp)
 
 	fmt.Printf("odrInXml :%s \n", odrInXml)
