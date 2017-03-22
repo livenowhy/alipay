@@ -4,6 +4,9 @@ package wxpay
 import (
 	"encoding/xml"
 	"github.com/livenowhy/goTools/xmltools"
+	"github.com/livenowhy/goTools/httptools"
+	"fmt"
+	"github.com/livenowhy/goTools/tokentools"
 )
 
 
@@ -71,4 +74,47 @@ func ParseQueryOrderResult(resp []byte) (QueryOrderResult, error) {
 	return queryOrderResult, nil
 }
 
+
+
+
+// https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_2&index=4
+func (this *AppTrans) newQueryXml(transId string) string {
+	param := make(map[string]string)
+	param["appid"] = this.Config.AppId
+	param["mch_id"] = this.Config.MchId
+	param["transaction_id"] = transId
+	param["nonce_str"] = tokentools.NewNonceString()
+
+	sign := httptools.Sign(param, this.Config.AppKey)
+	param["sign"] = sign
+
+	return xmltools.ToXmlString(param)
+}
+
+// Query the order from weixin pay server by transaction id of weixin pay
+func (this *AppTrans) Query(transId string) (QueryOrderResult, error) {
+	queryOrderResult := QueryOrderResult{}
+
+	queryXml := this.newQueryXml(transId)
+	// fmt.Println(queryXml)
+	resp, err := httptools.DoHttpPost(this.Config.QueryOrderUrl, []byte(queryXml))
+	if err != nil {
+		return queryOrderResult, nil
+	}
+
+	queryOrderResult, err = ParseQueryOrderResult(resp)
+	if err != nil {
+		return queryOrderResult, err
+	}
+
+	//verity sign of response
+	resultInMap := queryOrderResult.ToMap()
+	wantSign := httptools.Sign(resultInMap, this.Config.AppKey)
+	gotSign := resultInMap["sign"]
+	if wantSign != gotSign {
+		return queryOrderResult, fmt.Errorf("sign not match, want:%s, got:%s", wantSign, gotSign)
+	}
+
+	return queryOrderResult, nil
+}
 
