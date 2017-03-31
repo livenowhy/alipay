@@ -81,6 +81,13 @@ func (this *AliPay) doRequest(method string, param AliPayParam, results interfac
 		buf = strings.NewReader(this.URLValues(param).Encode())
 	}
 
+	fmt.Printf("this.URLValues(param): %s \n", this.URLValues(param))
+	fmt.Printf("doRequest: %s \n", this.URLValues(param).Encode())
+	fmt.Printf("doRequest: %v \n", this.URLValues(param).Encode())
+
+	fmt.Printf("param.ExtJSONParamValue(): %s \n", param.ExtJSONParamValue())
+	fmt.Printf("param.ExtJSONParamValue(): %s \n", param.ExtJSONParamName())
+
 
 	req, err := http.NewRequest(method, this.apiDomain, buf)
 	if err != nil {

@@ -36,4 +36,9 @@ type PaymentRequest struct {
 // 7. 支付结果通用通知 notify_url: "https://pay.weixin.qq.com/wxpay/pay.action"
 // 8. 交易保障   https://api.mch.weixin.qq.com/payitil/report
 
+
+// 1. 微信支付接口签名校验工具
+// https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=20_1
+
+// 2. 支付验收指引
 // https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=23_1

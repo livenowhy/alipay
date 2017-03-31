@@ -9,9 +9,9 @@ func TestTradePrecreate() {
 
 	var client = alipay.New(alipay.AppID, "2088102169227503", alipay.PublicKey, alipay.PrivateKey, false)
 	var p = alipay.AliPayTradePrecreate{}
-	p.OutTradeNo = "1266632323232"
+	p.OutTradeNo = "12666323fgfhgjhgj23232w"
 	p.Subject = "ssdsds"
-	p.TotalAmount = "1"
+	p.TotalAmount = "10"
 	p.TimeoutExpress = "15d"
 
 	var r, err = client.TradePrecreate(p)
@@ -24,7 +24,7 @@ func TestTradeQuery() {
 
 	var client = alipay.New(alipay.AppID, "2088102169227503", alipay.PublicKey, alipay.PrivateKey, false)
 	var p = alipay.AliPayTradeQuery{}
-	p.OutTradeNo = "1266632323232"
+	p.OutTradeNo = "12666323fgfhgjhgj23232w"
 
 	var r, err = client.TradeQuery(p)
 	fmt.Println(err, r)
@@ -55,9 +55,9 @@ func TestTradeCancel() {
 }
 
 func main() {
-	//TestTradePrecreate()
-	//TestTradeQuery()
-	TestTradeCancel()
+	TestTradePrecreate()
+	TestTradeQuery()
+	//TestTradeCancel()
 }
 
 
